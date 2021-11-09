@@ -1,0 +1,41 @@
+-- 1 Escriba una consulta para saber cuántos estudiantes son de la carrera Mecánica.
+
+SELECT COUNT(carrera) as "Carrera: mecánica" 
+FROM estudiante;
+
+-- 2. Escriba una consulta para saber, de la tabla PROFESOR, el salario mínimo de los profesores 
+-- nacidos en la década del 80.
+
+SELECT MIN(salario) AS "Salario mínimo" FROM profesor
+WHERE fecha_nacimiento BETWEEN 1980 and 1989;
+
+
+-- 3. Para el siguiente modelo relacional:
+
+-- 4. Escriba las siguientes consultas:
+
+-- Cantidad de pasajeros por país
+
+SELECT p.id, p.nombre, COUNT(*) AS "pasajeros"
+FROM pais p INNER JOIN pasajero c 
+on p.id = c.id_pais
+GROUP BY p.id;
+
+-- Suma de todos los pagos realizados
+
+SELECT SUM(monto) AS "Suma total de pagos"
+FROM pago;
+
+-- Suma de todos los pagos que realizó un pasajero. El monto debe aparecer con dos decimales.
+
+SELECT p.id, p.nombre, COUNT(*) AS "Pagos", SUM(c.monto) as "Total"
+FROM pasajero p INNER JOIN pago c 
+ON p.id = c.id_pasajero
+GROUP BY p.id;
+
+-- Promedio de los pagos que realizó un pasajero.
+
+SELECT p.id, p.nombre, COUNT(*) AS "Pagos", ROUND(AVG(c.monto),2) as "Promedio"
+FROM pasajero p INNER JOIN pago c 
+ON p.id = c.id_pasajero
+GROUP BY p.id;
