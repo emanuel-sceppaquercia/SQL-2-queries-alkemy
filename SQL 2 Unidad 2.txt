@@ -1,0 +1,47 @@
+-- 1. Nombre, apellido y cursos que realiza cada estudiante
+
+SELECT e.nombre, e.apellido, c.nombre 
+FROM estudiante e INNER JOIN inscripcion i 
+	INNER JOIN curso c 
+ON i.estudiante_legajo = e.legajo 
+AND i.curso_codigo = c.codigo
+ORDER BY e.nombre;
+
+-- 2. Nombre, apellido y cursos que realiza cada estudiante, ordenados por el nombre del curso
+
+SELECT e.nombre, e.apellido, c.nombre 
+FROM estudiante e INNER JOIN inscripcion i 
+	INNER JOIN curso c 
+ON i.estudiante_legajo = e.legajo 
+AND i.curso_codigo = c.codigo
+ORDER BY c.nombre;
+
+-- 3. Nombre, apellido y cursos que dicta cada profesor
+
+SELECT p.nombre, p.apellido, c.nombre 
+FROM profesor p INNER JOIN curso c
+ON p.id = c.profesor_id;
+ORDER BY e.nombre;
+
+-- 4. Nombre, apellido y cursos que dicta cada profesor, ordenados por el nombre del curso
+
+SELECT p.nombre, p.apellido, c.nombre 
+FROM profesor p INNER JOIN curso c
+ON p.id = c.profesor_id
+ORDER BY c.nombre;
+
+-- 5. Cupo disponible para cada curso (Si el cupo es de 35 estudiantes y hay 5 inscriptos, 
+-- el cupo disponible será 30)
+
+SELECT c.nombre, c.cupo - COUNT(*) as "Cupos disponibles" 
+FROM curso c INNER JOIN inscripcion i
+on c.codigo = i.curso_codigo
+GROUP BY c.nombre;
+
+-- 6. Cursos cuyo cupo disponible sea menor a 10
+
+SELECT c.nombre, c.cupo - COUNT(*) AS "disponible menor a 10"
+FROM curso c INNER JOIN inscripcion i
+ON c.codigo = i.curso_codigo
+GROUP BY c.cupo
+HAVING c.cupo - COUNT(*) < 10;
