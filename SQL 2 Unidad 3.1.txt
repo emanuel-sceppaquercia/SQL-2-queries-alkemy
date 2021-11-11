@@ -1,0 +1,22 @@
+-- 1. Crear una tabla persona sin primary key y solamente con dos campos: id y nombre
+
+CREATE TABLE persona(
+	id int NOT NULL,
+  	nombre varchar(40) NOT NULL
+);
+
+-- 2. Inserte datos siguiendo un orden no secuencial para el id.
+
+INSERT INTO persona VALUES (5,"Emanuel"),(2,"Marta"),(4,"Robert");
+
+-- 3. Consulte los datos para visualizar el orden de registros.
+
+SELECT * FROM persona;
+
+-- 4. Agregue una clave primaria para el campo id.
+
+ALTER TABLE persona ADD PRIMARY KEY (id);
+
+-- 5. Consulte los datos para visualizar el orden de registros.
+
+SELECT * FROM persona;
