@@ -1,0 +1,19 @@
+-- 1. Escriba una consulta que devuelva la cantidad de profesores que dictan más de un curso 
+-- en el turno Noche.
+
+SELECT p.nombre, COUNT(*) as "Cant. turnos noche"
+FROM profesor p INNER JOIN curso c 
+ON p.id = c.profesor_id
+WHERE c.turno = "noche"
+GROUP BY p.nombre
+HAVING COUNT(*) > 1;
+
+-- 2. Escriba una consulta para obtener la información de todos los estudiantes que no realizan 
+-- el curso con código 105.
+
+SELECT * FROM estudiante e
+WHERE e.legajo NOT IN(
+	SELECT i.estudiante_legajo 
+    FROM inscripcion i 
+	WHERE i.curso_codigo = 105
+)
